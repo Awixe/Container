@@ -16,7 +16,6 @@
 namespace Awixe\Container;
 
 use Awixe\Container\Exception\InvalidServiceReference;
-use Awixe\Container\Configuration;
 use Pimple\Container as PimpleContainer;
 use Traversable;
 
@@ -38,7 +37,7 @@ class Manager extends Container implements ManagerInterface
             if (!file_exists($path)) {
                throw new InvalidServiceReference('A service does not exist.');
             }
-            require_once 
+            require_once $path;
             if (isset($servicesToCall['protectServices'])) {
                 foreach ($servicesToCall['protectServices'] as $service) {
                     if (!in_array($service, $servicesToCall)) {
@@ -47,6 +46,7 @@ class Manager extends Container implements ManagerInterface
                     $container[$service] = $container->protect(function () {
                         return $service();
                     });
+                    
                 }
             }
             foreach ($servicesToCall as $service) {
@@ -57,6 +57,7 @@ class Manager extends Container implements ManagerInterface
 
                     return new $service();
                 });
+                
             }
         }
         static::setContainer($container);
