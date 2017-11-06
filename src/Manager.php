@@ -35,7 +35,7 @@ class Manager extends Container implements ManagerInterface
             }
             $path = ROOT_APPLICATION.ltrim(rtrim($custompath, '/\\'), '/\\')."/{$service}.php";
             if (!file_exists($path)) {
-               throw new InvalidServiceReference('A service does not exist.');
+                throw new InvalidServiceReference('A service does not exist.');
             }
             require_once $path;
             if (isset($servicesToCall['protectServices'])) {
@@ -46,7 +46,6 @@ class Manager extends Container implements ManagerInterface
                     $container[$service] = $container->protect(function () {
                         return $service();
                     });
-                    
                 }
             }
             foreach ($servicesToCall as $service) {
@@ -57,7 +56,6 @@ class Manager extends Container implements ManagerInterface
 
                     return new $service();
                 });
-                
             }
         }
         static::setContainer($container);
