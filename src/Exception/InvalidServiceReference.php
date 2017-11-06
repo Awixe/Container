@@ -11,7 +11,9 @@
  * <https://github.com/Awixe/Container/blob/master/LICENSE>
  *
  */
+
 namespace Awixe\Container\Exception;
+
 class InvalidServiceReferenceException extends \InvalidArgumentException implements NotFoundExceptionInterface
 {
 }
