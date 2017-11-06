@@ -16,6 +16,7 @@
 namespace Awixe\Container;
 
 use Awixe\Container\Exception\InvalidServiceReference;
+use Awixe\Container\Configuration;
 use Pimple\Container as PimpleContainer;
 use Traversable;
 
@@ -33,14 +34,30 @@ class Manager extends Container implements ManagerInterface
             if (!is_string($service)) {
                 throw new InvalidServiceReference('Array values need to be passed as strings.');
             }
-            require_once ROOT_APPLICATION.ltrim(rtrim($custompath, '/\\'), '/\\')."/{$service}.php";
-            $container[$service] = $container->factory(function ($container) {
-                if (isset($servicesToCall['sevicesLinks'][$service])) {
-                    return new $service(self::passServices($servicesToCall['sevicesLinks'][$service], $container));
+            $path = ROOT_APPLICATION.ltrim(rtrim($custompath, '/\\'), '/\\')."/{$service}.php";
+            if (!file_exists($path)) {
+               throw new InvalidServiceReference('A service does not exist.');
+            }
+            require_once 
+            if (isset($servicesToCall['protectServices'])) {
+                foreach ($servicesToCall['protectServices'] as $service) {
+                    if (!in_array($service, $servicesToCall)) {
+                        continue;
+                    }
+                    $container[$service] = $container->protect(function () {
+                        return $service();
+                    });
                 }
+            }
+            foreach ($servicesToCall as $service) {
+                $container[$service] = $container->factory(function ($container) {
+                    if (isset($servicesToCall['sevicesLinks'][$service])) {
+                        return new $service(self::passServices($servicesToCall['sevicesLinks'][$service], $container));
+                    }
 
-                return new $service();
-            });
+                    return new $service();
+                });
+            }
         }
         static::setContainer($container);
 
