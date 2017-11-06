@@ -24,30 +24,39 @@ define('ROOT_APPLICATION', __DIR__  . '/../../../../');
 
 class Manager extends Container implements ManagerInterface
 {
-    public function __invoke($servicesToCall = [], array $baseConfiguration = array())
+    public static function factory($servicesToCall = [])
     {
         if (!($servicesToCall instanceof Traversable || is_array($servicesToCall))) {
-            throw new InvalidServiceReference($servicesToCall);
+            throw new InvalidServiceReference('Not compatible with the foreach method.');
         }
         $container = new PimpleContainer();
-        if (empty($baseConfiguration)) {
-            throw new InvalidBaseConfigurationException('No data was provided.');
-        }
-        $services = isset($baseConfiguration['services'] ? $baseConfiguration['services'] : null;
-        $customPath = isset($baseConfiguration['servicesPath']) ? $baseConfiguration['servicesPath'] : '';
-        if (!$services) {
-            throw new InvalidBaseConfigurationException('No services to call.');
-        }
-        if (!is_string($customPath)) {
-            throw new InvalidBaseConfigurationException('Invalid path location.');
-        }
-        foreach ($services as $service) {
+        foreach ($servicesToCall as $service) {
             if (!is_string($service)) {
-                throw new InvalidBaseConfigurationException('Array values need to be passed as strings.');
+                throw new InvalidServiceReference('Array values need to be passed as strings.');
             }
-            require_once ROOT_APPLICATION . rtrim($custompath, '/\\') . "/{$service}.php";
+            require_once ROOT_APPLICATION . ltrim(rtrim($custompath, '/\\'), '/\\') . "/{$service}.php";
+            $container[$service] = $container->factory(function ($container) {
+                if (isset($servicesToCall['sevicesLinks'][$service])) {
+                    return new $service(self::passServices($servicesToCall['sevicesLinks'][$service], $container));
+                }
+                return new $service();
+            });
         }
-      
-        
+        static::setContainer($container);
+        return $container;
+    }
+    public function __invoke(string $service = null) {
+        return static::initialize($service);
+    }
+    private static function passServices($servicesToCall, $container) {
+        $passing = [];
+        foreach ($servicesToCall as $service) {
+            if (isset($container[$service])) {
+                $passing += [
+                    $container[$service]
+                ];
+            }
+        }
+        return $passing;
     }
 }
