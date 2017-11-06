@@ -16,6 +16,7 @@
 namespace Awixe\Container;
 
 use Awixe\Exception\NotInstanceOfPimpleException;
+use Awixe\Exception\UnknownServiceException;
 use Pimple\Container as PimpleContainer;
 
 class Container
