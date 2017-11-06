@@ -9,6 +9,8 @@
  * Everyone is permitted to copy and distribute verbatim copies
  * of this license document, but changing it is not allowed.
  *
+ * <https://github.com/Awixe/Container/blob/master/LICENSE>
+ *
  */
 
 namespace Awixe\Container\Exception;
