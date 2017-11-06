@@ -15,12 +15,11 @@
 
 namespace Awixe\Container;
 
-use Awixe\Container\Exception\InvalidBaseConfiguration;
 use Awixe\Container\Exception\InvalidServiceReference;
 use Pimple\Container as PimpleContainer;
 use Traversable;
 
-define('ROOT_APPLICATION', __DIR__  . '/../../../../');
+define('ROOT_APPLICATION', __DIR__.'/../../../../');
 
 class Manager extends Container implements ManagerInterface
 {
@@ -34,29 +33,36 @@ class Manager extends Container implements ManagerInterface
             if (!is_string($service)) {
                 throw new InvalidServiceReference('Array values need to be passed as strings.');
             }
-            require_once ROOT_APPLICATION . ltrim(rtrim($custompath, '/\\'), '/\\') . "/{$service}.php";
+            require_once ROOT_APPLICATION.ltrim(rtrim($custompath, '/\\'), '/\\')."/{$service}.php";
             $container[$service] = $container->factory(function ($container) {
                 if (isset($servicesToCall['sevicesLinks'][$service])) {
                     return new $service(self::passServices($servicesToCall['sevicesLinks'][$service], $container));
                 }
+
                 return new $service();
             });
         }
         static::setContainer($container);
+
         return $container;
     }
-    public function __invoke(string $service = null) {
+
+    public function __invoke(string $service = null)
+    {
         return static::initialize($service);
     }
-    private static function passServices($servicesToCall, $container) {
+
+    private static function passServices($servicesToCall, $container)
+    {
         $passing = [];
         foreach ($servicesToCall as $service) {
             if (isset($container[$service])) {
                 $passing += [
-                    $container[$service]
+                    $container[$service],
                 ];
             }
         }
+
         return $passing;
     }
 }
