@@ -14,7 +14,13 @@
  */
 
 namespace Awixe\Container;
-
+use Awixe\Container\Exception\InvalidServiceReference;
+use Traversable;
 class Manager extends Container implements ManagerInterface
 {
+    public function __invoke($servicesToCall = []) {
+        if (!($servicesToCall instanceof Traversable) && !is_array($servicesToCall)) {
+            throw new InvalidServiceReference($servicesToCall);
+        }
+    }
 }
