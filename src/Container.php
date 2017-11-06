@@ -37,12 +37,13 @@ class Container
         }
     }
     protected static function getInstance() {
-		if (!(self::$instance instanceof PimpleContainer)) {
-			throw new NotInstanceOfPimpleException(self::$container);
-		}
-		return self::$instance;
-	}
-	protected static function setConatiner(PimpleContainer $container) {
-		self::$instance = $container;
-	}
+        if (!(self::$instance instanceof PimpleContainer)) {
+            throw new NotInstanceOfPimpleException(self::$container);
+        }
+        return self::$instance;
+    }
+    protected static function setConatiner(PimpleContainer $container) {
+        self::$instance = $container;
+    }
 }
+?>
