@@ -12,9 +12,12 @@
  * <https://github.com/Awixe/Container/blob/master/LICENSE>
  *
  */
+
 namespace Awixe\Container;
-interface ManagerInerface {
+
+interface ManagerInterface
+{
     public static function factory($servicesToCall = []);
+
     public function __invoke(string $service = null);
 }
-?>
