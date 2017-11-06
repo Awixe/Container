@@ -12,7 +12,9 @@
  * <https://github.com/Awixe/Container/blob/master/LICENSE>
  *
  */
-namespace Awixe\Container;
-class Manager extends Container implements ManagerInterface {
 
+namespace Awixe\Container;
+
+class Manager extends Container implements ManagerInterface
+{
 }
