@@ -12,6 +12,6 @@
  *
  */
 namespace Awixe\Container\Exception;
-class InvalidServiceReferenceException extends \UnexpectedValueException implements NotFoundExceptionInterface
+class InvalidServiceReferenceException extends \InvalidArgumentException implements NotFoundExceptionInterface
 {
 }
