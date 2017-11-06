@@ -31,7 +31,7 @@ class Container
         if (is_null($service)) {
             return $container;
         } elseif (!isset($container[$service])) {
-            throw new UnknownServiceException($service);
+            throw new UnknownServiceException('Unknown service passed.');
         } else {
             return $container[$service];
         }
