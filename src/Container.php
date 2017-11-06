@@ -10,7 +10,7 @@
  * of this license document, but changing it is not allowed.
  *
  */
-namespace Awixe/Container;
+namespace Awixe\Container;
 use Awixe\Exception\NotInstanceOfPimpleException;
 use Pimple\Container as PimpleContainer;
 class Container {
