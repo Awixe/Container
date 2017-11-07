@@ -12,13 +12,19 @@
  * <https://github.com/Awixe/Container/blob/master/LICENSE>
  *
  */
+
 namespace Awixe\Container;
+
 use Awixe\Container\Exception\NotInstanceOfPimpleException;
 use Awixe\Container\Exception\UnknownServiceException;
 use Pimple\Container as PimpleContainer;
-class Container {
+
+class Container
+{
     protected static $instance;
-    protected static function initialize(string $service = null) {
+
+    protected static function initialize(string $service = null)
+    {
         if (!(self::$instance instanceof PimpleContainer)) {
             throw new NotInstanceOfPimpleException(self::$container);
         }
@@ -31,13 +37,18 @@ class Container {
             return $container[$service];
         }
     }
-    protected static function getInstance() {
+
+    protected static function getInstance()
+    {
         if (!(self::$instance instanceof PimpleContainer)) {
             throw new NotInstanceOfPimpleException(self::$container);
         }
+
         return self::$instance;
     }
-    protected static function setConatiner(PimpleContainer $container) {
+
+    protected static function setConatiner(PimpleContainer $container)
+    {
         self::$instance = $container;
     }
 }
