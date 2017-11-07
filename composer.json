@@ -1,9 +1,8 @@
 {
-    "name": "awixe/container",
     "type": "library",
+    "name": "awixe/container",
     "description": "A wrapper for Silex's dependency injection container.",
     "keywords": ["php7", "php-container", "pimple"],
-    "homepage": "https://github.com/Awixe/Container",
     "license": "GPL-3.0",
     "authors": [
         {
@@ -17,10 +16,11 @@
         "pimple/pimple": "^3.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "^5.0"
+        "phpunit/phpunit": "^6.4"
     },
     "autoload": {
-        "psr-0": { "Awixe_Container": "src/" }
+        "psr-0": { "Monolog\\Container\\": "src/" }
+        "files": [ "src/Functions.php" ]
     }
 
 }
