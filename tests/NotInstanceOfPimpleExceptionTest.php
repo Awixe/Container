@@ -12,7 +12,11 @@
  * <https://github.com/Awixe/Container/blob/master/LICENSE>
  *
  */
+
 namespace Awixe\Container\Tests;
+
 use PHPUnit\Framework\TestCase;
-final class NotInstanceOfPimpleExceptionTest extends TestCase {
+
+final class NotInstanceOfPimpleExceptionTest extends TestCase
+{
 }
