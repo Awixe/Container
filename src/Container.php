@@ -23,7 +23,7 @@ class Container
 {
     protected static $instance;
 
-    protected static function initialize(string $service = null)
+    public static function initialize(string $service = null)
     {
         if (!(self::$instance instanceof PimpleContainer)) {
             throw new NotInstanceOfPimpleException(self::$container);
@@ -38,7 +38,7 @@ class Container
         }
     }
 
-    protected static function getInstance()
+    public static function getInstance()
     {
         if (!(self::$instance instanceof PimpleContainer)) {
             throw new NotInstanceOfPimpleException(self::$container);
@@ -47,7 +47,7 @@ class Container
         return self::$instance;
     }
 
-    protected static function setConatiner(PimpleContainer $container)
+    public static function setConatiner(PimpleContainer $container)
     {
         self::$instance = $container;
     }
