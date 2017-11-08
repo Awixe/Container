@@ -12,9 +12,7 @@
  * <https://github.com/Awixe/Container/blob/master/LICENSE>
  *
  */
-
 namespace Awixe\Container\Tests;
-
 use Awixe\Container\Container;
 use Awixe\Container\Exception\NotInstanceOfPimpleException;
 use Awixe\Container\Exception\UnknownServiceException;
