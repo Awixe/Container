@@ -12,3 +12,8 @@
  * <https://github.com/Awixe/Container/blob/master/LICENSE>
  *
  */
+use Awixe\Container\Container;
+use Pimple\Container as PimpleContainer;
+function app(string $service = null) {
+    return Container::initialize();
+}
