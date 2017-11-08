@@ -19,8 +19,6 @@ use Awixe\Container\Exception\NotInstanceOfPimpleException;
 use Awixe\Container\Exception\UnknownServiceException;
 use Pimple\Container as PimpleContainer;
 
-declare(strict_types=1);
-
 class Container
 {
     protected static $instance;
