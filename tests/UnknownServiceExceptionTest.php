@@ -12,7 +12,11 @@
  * <https://github.com/Awixe/Container/blob/master/LICENSE>
  *
  */
+
 namespace Awixe\Container\Tests;
+
 use PHPUnit\Framework\TestCase;
-final class UnknownServiceExceptionTest extends TestCase {
+
+final class UnknownServiceExceptionTest extends TestCase
+{
 }
