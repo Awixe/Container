@@ -28,7 +28,7 @@ class Container
         if (!(self::$instance instanceof PimpleContainer)) {
             throw new NotInstanceOfPimpleException(self::$container);
         }
-        
+
         $container = self::$instance;
         if (is_null($service)) {
             return $container;
