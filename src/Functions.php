@@ -13,6 +13,7 @@
  *
  */
 use Awixe\Container\Container;
+
 function app(string $service = null)
 {
     return Container::initialize($service);
