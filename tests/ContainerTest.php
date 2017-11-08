@@ -13,6 +13,7 @@
  *
  */
 namespace Awixe\Container\Tests;
+
 use Awixe\Container\Container;
 use Awixe\Container\Exception\NotInstanceOfPimpleException;
 use Awixe\Container\Exception\UnknownServiceException;
@@ -21,32 +22,41 @@ use Pimple\Container as PimpleContainer;
 
 final class ContainerTest extends TestCase
 {
-    public function intializeTest() {
+    public function intializeTest()
+    {
         $container = new PimpleContainer();
         $service = 'fromString';
         $value = 'randomValue';
         $container[$service] = $value;
         Container::setContainer($container);
+        
         $this->assertInstanceOf(
             PimpleContainer::class,
             Container::initialize()
         );
     }
+    
     public function intializeTest2() {
         $container = new PimpleContainer();
         $service = 'fromString';
         Container::setContainer($container);
+        
         $this->expectException(UnknownSrviceException::class);
     }
+    
     public function getInstanceTest() {
         $container = new PimpleContainer();
         $container['fromString'] = 'Hello world!';
-        Container::setContainer($container)
+        Container::setContainer($container);
+            
         $this->assertInstanceOf(
             PimpleContainer::class,
             Container::getInstance()
         );
     }
-    public function setContainerTest() {
+    
+    public function setContainerTest()
+    {
     }
+    
 }
