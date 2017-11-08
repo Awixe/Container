@@ -12,11 +12,10 @@
  * <https://github.com/Awixe/Container/blob/master/LICENSE>
  *
  */
+
 namespace Awixe\Container\Tests;
 
 use Awixe\Container\Container;
-use Awixe\Container\Exception\NotInstanceOfPimpleException;
-use Awixe\Container\Exception\UnknownServiceException;
 use PHPUnit\Framework\TestCase;
 use Pimple\Container as PimpleContainer;
 
@@ -29,34 +28,35 @@ final class ContainerTest extends TestCase
         $value = 'randomValue';
         $container[$service] = $value;
         Container::setContainer($container);
-        
+
         $this->assertInstanceOf(
             PimpleContainer::class,
             Container::initialize()
         );
     }
-    
-    public function intializeTest2() {
+
+    public function intializeTest2()
+    {
         $container = new PimpleContainer();
         $service = 'fromString';
         Container::setContainer($container);
-        
+
         $this->expectException(UnknownSrviceException::class);
     }
-    
-    public function getInstanceTest() {
+
+    public function getInstanceTest()
+    {
         $container = new PimpleContainer();
         $container['fromString'] = 'Hello world!';
         Container::setContainer($container);
-            
+
         $this->assertInstanceOf(
             PimpleContainer::class,
             Container::getInstance()
         );
     }
-    
+
     public function setContainerTest()
     {
     }
-    
 }
